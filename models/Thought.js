@@ -41,6 +41,7 @@ thoughtSchema.virtual("reactionCount")
         return this.reactions.length;
     });
 
+// Uses mongoose.model to create a model named thought, based on schema named thoughtSchema
 const Thought = model("thought", thoughtSchema);
 
 module.exports = Thought;
