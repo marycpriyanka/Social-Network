@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const reactionSchema = require("./Reaction");
 
 // Schema to create a thought model
 const thoughtSchema = new Schema(
@@ -11,7 +12,9 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
+            // Sets default value to current timestamp
             default: Date.now,
+            // Getter method to format the timestamp on query.
             get: (date) => {
                 if (date) {
                     return date.toLocaleDateString();
