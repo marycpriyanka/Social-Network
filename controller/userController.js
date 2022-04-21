@@ -25,5 +25,16 @@ module.exports = {
         User.findById(req.params.userId)
             .then(user => user ? res.status(200).json(user) : res.status(404).json({ message: "No user found with that id" }))
             .catch(err => res.status(500).json(err));
+    },
+
+    // Update a user by id
+    updateUser(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+        .then(user => user ? res.status(200).json(user) : res.status(404).json({ message: "No user found with this id!" }))
+        .catch(err => res.status(500).json(err));
     }
 }
