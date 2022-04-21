@@ -18,5 +18,12 @@ module.exports = {
         else {
             res.status(404).json("Request body must contain username and password");
         }
+    },
+
+    // Get a single user by its id and populated thought and friend data
+    getSingleUser(req, res) {
+        User.findById(req.params.userId)
+            .then(user => user ? res.status(200).json(user) : res.status(404).json({ message: "No user found with that id" }))
+            .catch(err => res.status(500).json(err));
     }
 }
