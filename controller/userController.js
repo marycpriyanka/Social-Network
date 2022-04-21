@@ -23,7 +23,7 @@ module.exports = {
     // Get a single user by its id and populated thought and friend data
     getSingleUser(req, res) {
         User.findById(req.params.userId)
-            .then(user => user ? res.status(200).json(user) : res.status(404).json({ message: "No user found with that id" }))
+            .then(user => user ? res.status(200).json(user) : res.status(404).json({ message: "No user found with this id" }))
             .catch(err => res.status(500).json(err));
     },
 
@@ -43,10 +43,19 @@ module.exports = {
         User.findByIdAndDelete(req.params.userId)
             .then(user => 
                 // Remove user's associated thoughts
-                user ? Thought.deleteMany({ _id: { $in: user.thoughts } }) : res.status(404).json({ message: "No user found with that id!" })
+                user ? Thought.deleteMany({ _id: { $in: user.thoughts } }) : res.status(404).json({ message: "No user found with this id!" })
             )
             .then(() => res.status(200).json({ message: "User and thought deleted!" }))
             .catch(err => res.status(500).json(err));
-        
+    },
+
+    addFriend(req, res) {
+        User.findByIdAndUpdate(
+            req.params.userId,
+            { $addToSet: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+        .then(user => user ? res.status(200).json(user) : res.status(404).json({ message: "No user found with this id!" }))
+        .catch(err => res.status(500).json(err));
     }
 }
