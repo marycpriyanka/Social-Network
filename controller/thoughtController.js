@@ -66,7 +66,7 @@ module.exports = {
                 { $addToSet: { reactions: req.body } },
                 {runValidators: true, new: true }
             )
-            .then(reaction => res.status(200).json(reaction))
+            .then(thought => thought ? res.status(200).json(thought) : res.status(404).json({ message: "No thought found with that id!" }))
             .catch(err => res.status(500).json(err));
         }
         else {
@@ -79,7 +79,7 @@ module.exports = {
         Thought.findByIdAndUpdate(
             req.params.thoughtId,
             { $pull: { reactions: {reactionId: req.params.reactionId } } },
-            { new: true }
+            { runValidators: true, new: true }
         )
         .then(thought => thought ? res.status(200).json(thought) : res.status(404).json({ message: "No thought found with that id!" }))
         .catch(err => res.status(500).json(err));
