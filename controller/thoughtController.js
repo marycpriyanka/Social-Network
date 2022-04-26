@@ -1,10 +1,10 @@
-const { User, Thought } = require("../models");
+const { User, Thought, Reaction } = require("../models");
 
 module.exports = {
     // Get all thoughts
     getThoughts(req, res) {
         Thought.find()
-            .then(thoughts => res.status(200).json(thoughts))  
+            .then(thoughts => res.status(200).json(thoughts))
             .catch(err => res.status(500).json(err));
     },
 
@@ -23,7 +23,7 @@ module.exports = {
                     // Push the created thought's _id to the associated user's thoughts array field
                     return User.findByIdAndUpdate(
                         req.body.userId,
-                        { $addToSet: { thoughts: thought._id }},
+                        { $addToSet: { thoughts: thought._id } },
                         { runValidators: true, new: true }
                     )
                 })
@@ -42,8 +42,8 @@ module.exports = {
             { $set: req.body },
             { runValidators: true, new: true }
         )
-        .then(thought => thought ? res.status(200).json(thought) : res.status(404).json({ message: "No thought found with that id!" }))
-        .catch(err => res.status(500).json(err));
+            .then(thought => thought ? res.status(200).json(thought) : res.status(404).json({ message: "No thought found with that id!" }))
+            .catch(err => res.status(500).json(err));
     },
 
     // Remove a thought by its id
@@ -54,12 +54,24 @@ module.exports = {
                 { $pull: { thoughts: req.params.thoughtId } },
                 { new: true }
             ) : res.status(404).json({ message: "No thought found with that id!" }))
-            .then(user => user ? res.status(200).json({ message: "Thought deleted!"}) : res.status(404).json({ message: "Thought deleted but no associated user found!" })) 
+            .then(user => user ? res.status(200).json({ message: "Thought deleted!" }) : res.status(404).json({ message: "Thought deleted but no associated user found!" }))
             .catch(err => res.status(500).json(err));
     },
 
+    // Create a reaction stored in a single thought's reactions array field
     createReaction(req, res) {
-
+        if (req.body.reactionBody && req.body.username) {
+            Thought.findByIdAndUpdate(
+                req.params.thoughtId,
+                { $addToSet: { reactions: req.body } },
+                {runValidators: true, new: true }
+            )
+            .then(reaction => res.status(200).json(reaction))
+            .catch(err => res.status(500).json(err));
+        }
+        else {
+            res.status(404).json({ message: "Request body must contain reactionBody and username" });
+        }
     },
 
     deleteReaction(req, res) {
