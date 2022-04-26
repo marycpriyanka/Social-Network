@@ -1,4 +1,4 @@
-const { Thought } = require("../models");
+const { User, Thought } = require("../models");
 
 module.exports = {
     // Get all thoughts
@@ -22,7 +22,7 @@ module.exports = {
                 .then(thought => {
                     // Push the created thought's _id to the associated user's thoughts array field
                     return User.findByIdAndUpdate(
-                        req.params.userId,
+                        req.body.userId,
                         { $addToSet: { thoughts: thought._id }},
                         { runValidators: true, new: true }
                     )
@@ -35,8 +35,15 @@ module.exports = {
         }
     },
 
+    // Update a thought by its id
     updateThought(req, res) {
-
+        Thought.findByIdAndUpdate(
+            req.params.thoughtId,
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+        .then(thought => thought ? res.status(200).json(thought) : res.status(404).json({ message: "No thought found with that id!" }))
+        .catch(err => res.status(500).json(err));
     },
 
     deleteThought(req, res) {
