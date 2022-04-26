@@ -46,8 +46,16 @@ module.exports = {
         .catch(err => res.status(500).json(err));
     },
 
+    // Remove a thought by its id
     deleteThought(req, res) {
-
+        Thought.findByIdAndDelete(req.params.thoughtId)
+            .then(thought => thought ? User.findOneAndUpdate(
+                { thoughts: req.params.thoughtId },
+                { $pull: { thoughts: req.params.thoughtId } },
+                { new: true }
+            ) : res.status(404).json({ message: "No thought found with that id!" }))
+            .then(user => user ? res.status(200).json({ message: "Thought deleted!"}) : res.status(404).json({ message: "Thought deleted but no associated user found!" })) 
+            .catch(err => res.status(500).json(err));
     },
 
     createReaction(req, res) {
