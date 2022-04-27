@@ -29,7 +29,9 @@ You can test the endpoints on Postman or Insomnia using http://localhost.3000/.
 
 ## Usage
 
-Use Postman or Insomnia to test the API and to create your own data.
+Use Postman or Insomnia to test the API and to create your own data. 
+Use /api/users to test all user routes. 
+Use /api/users/:userId/friends/:friendId to add or remove a friend to a user's friend list.
 
 ##  Technologies used
 
