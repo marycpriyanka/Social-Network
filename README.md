@@ -32,20 +32,19 @@ You can test the endpoints on Postman or Insomnia using http://localhost.3000/.
 Use Postman or Insomnia to test the API and to create your own data. 
 Use /api/users to test all user routes. 
 Use /api/users/:userId/friends/:friendId to add or remove a friend to a user's friend list.
+Use /api/thoughts to test all thought routes.
+Use /api/thoughts/:thoughtId/reactions to create a reaction stored in a single thought's reactions array field.
+Use /api/thoughts/:thoughtId/reactions/:reactionId to pull and remove a reaction by the reaction's reactionId value
 
 ##  Technologies used
 
-
+Node.js, Express.js, Mongoose package, MongoDB, JavaScript
 
 ## License
 
 Social Network is available under the MIT License.
 
 ## How to Contribute
-
-
-
-## Tests
 
 
 
