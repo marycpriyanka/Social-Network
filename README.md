@@ -17,11 +17,19 @@ An API for a social network web application where users can share their thoughts
 
 ## Installation
 
+### Clone the repository 
+git clone git@github.com:marycpriyanka/Social-Network.git
+   
+### Install Dependencies
+- All NPM packages required for this application (Express, Mongoose) are already listed as dependencies in the package.json file. Run the command 'npm i' in your terminal at the root directory level to install the packages.
+- Ensure that you have Node.js installed on your machine, The application will be invoked by entering 'node server.js' in the command line.
 
+### Start Application
+You can test the endpoints on Postman or Insomnia using http://localhost.3000/.
 
 ## Usage
 
-
+Use Postman or Insomnia to test the API and to create your own data.
 
 ##  Technologies used
 
