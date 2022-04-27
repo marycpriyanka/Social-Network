@@ -42,7 +42,7 @@ Use /api/thoughts/:thoughtId/reactions/:reactionId to pull and remove a reaction
 
 Find a walkthrough video that demonstrates the functionality of the Social Network API in the link below:
 
-
+https://drive.google.com/file/d/1iE1k0vEU_VFA6DE6H1MAr0P8WAhZKwS3/view?usp=sharing
 
 ##  Technologies used
 
