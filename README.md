@@ -12,7 +12,6 @@ An API for a social network web application where users can share their thoughts
 - [Technologies used](#technologies-used)
 - [License](#license)
 - [How to Contribute](#how-to-contribute)
-- [Tests](#tests)
 - [Questions](#questions)
 
 ## Installation
@@ -30,11 +29,20 @@ You can test the endpoints on Postman or Insomnia using http://localhost.3000/.
 ## Usage
 
 Use Postman or Insomnia to test the API and to create your own data. 
-Use /api/users to test all user routes. 
+
+Use /api/users to test all user routes.
+
 Use /api/users/:userId/friends/:friendId to add or remove a friend to a user's friend list.
+
 Use /api/thoughts to test all thought routes.
+
 Use /api/thoughts/:thoughtId/reactions to create a reaction stored in a single thought's reactions array field.
-Use /api/thoughts/:thoughtId/reactions/:reactionId to pull and remove a reaction by the reaction's reactionId value
+
+Use /api/thoughts/:thoughtId/reactions/:reactionId to pull and remove a reaction by the reaction's reactionId value.
+
+Find a walkthrough video that demonstrates the functionality of the Social Network API in the link below:
+
+
 
 ##  Technologies used
 
@@ -46,7 +54,9 @@ Social Network is available under the MIT License.
 
 ## How to Contribute
 
+Contributions and ideas are welcome. Before submitting an issue, please take a moment to look over the contributing guidelines in https://www.contributor-covenant.org/ . Before submitting pull requests, ensure the following:
 
+Fork the repo and create your branch from devlop. Test your code.
 
 ## Questions
 
